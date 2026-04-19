@@ -70,7 +70,10 @@ services:
       - ENABLE_EMAIL_VERIFICATION=${ENABLE_EMAIL_VERIFICATION:-false}
       # web: https://github.com/plausible/community-edition/wiki/configuration#web
       - HTTP_PORT=${HTTP_PORT:-8000}
-      - HTTPS_PORT=${HTTPS_PORT:-8443}
+      # HTTPS_PORT intentionally not set: when it's defined, Plausible enables
+      # its internal TLS listener and activates force_ssl, which causes a
+      # redirect loop behind reverse proxies (Traefik/Coolify) that terminate
+      # TLS externally and forward plain HTTP.
       # databases: https://github.com/plausible/community-edition/wiki/configuration#database
       - DATABASE_URL=${DATABASE_URL:-postgres://postgres:postgres@plausible_db:5432/plausible}
       - CLICKHOUSE_DATABASE_URL=${CLICKHOUSE_DATABASE_URL:-http://plausible_events_db:8123/plausible_events_db}
