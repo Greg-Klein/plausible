@@ -74,10 +74,9 @@ services:
       - GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET
       # geolocation: https://github.com/plausible/community-edition/wiki/configuration#ip-geolocation
-      - IP_GEOLOCATION_DB
-      - GEONAMES_SOURCE_FILE
-      - MAXMIND_LICENSE_KEY
-      - MAXMIND_EDITION
+      # (Uses the DB bundled in the image by default. Declare these here only
+      # when overriding with a real file path or MaxMind credentials, because
+      # Docker Compose passes unset vars as "" which breaks File.stream!.)
       # email: https://github.com/plausible/community-edition/wiki/configuration#email
       - MAILER_ADAPTER=${MAILER_ADAPTER:-Bamboo.LocalAdapter}
       - MAILER_EMAIL=${MAILER_EMAIL:-noreply@localhost}
