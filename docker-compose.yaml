@@ -57,6 +57,10 @@ services:
       - 8000
     environment:
       - TMPDIR=/var/lib/plausible/tmp
+      # Coolify magic var: tells the reverse proxy to route the FQDN assigned
+      # to this service to container port 8000.
+      # https://coolify.io/docs/knowledge-base/docker/compose#making-services-available-to-the-outside-world
+      - SERVICE_FQDN_PLAUSIBLE_8000
       # required: https://github.com/plausible/community-edition/wiki/configuration#required
       - BASE_URL=${BASE_URL}
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
